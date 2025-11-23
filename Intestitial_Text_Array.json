@@ -1,0 +1,150 @@
+{
+    "c2array": true,
+    "size": [
+        10,
+        4,
+        1
+    ],
+    "data": [
+        [
+            [
+                "STORYLINE"
+            ],
+            [
+                "You are an elite Indian soldier.\nInfiltrate enemy lines in stealth, disable foes, contact HQ and take out the bosses.\nMake Your Country Proud!"
+            ],
+            [
+                "START GAME"
+            ],
+            [
+                ""
+            ]
+        ],
+        [
+            [
+                "STAGE 1"
+            ],
+            [
+                "- Spot and shoot the enemies in stealth mode.\n- Keep away from enemy sight.\n- Reach the marked checkpoint in given time!"
+            ],
+            [
+                "START MISSION"
+            ],
+            [
+                ""
+            ]
+        ],
+        [
+            [
+                "STAGE 1 CLEARED"
+            ],
+            [
+                "Bravo!!\n\nYou have reached the 1st checkpoint!"
+            ],
+            [
+                "BOOK TICKETS NOW"
+            ],
+            [
+                "CONTINUE MISSION"
+            ]
+        ],
+        [
+            [
+                "STAGE 1 NOT CLEARED"
+            ],
+            [
+                "Alarm Triggered! \nYou have been spotted!\n\nFall back & Restart Mission!"
+            ],
+            [
+                "BOOK TICKETS NOW"
+            ],
+            [
+                "TRY AGAIN"
+            ]
+        ],
+        [
+            [
+                "STAGE 2"
+            ],
+            [
+                "- Shoot the enemies as soon as they are spotted in cross-hare!\n\n- Kill 2 targets in given time!\n\n- Use bullets wisely."
+            ],
+            [
+                "BOOK TICKETS NOW"
+            ],
+            [
+                "CONTINUE MISSION"
+            ]
+        ],
+        [
+            [
+                "STAGE 2 CLEARED"
+            ],
+            [
+                "Enemy has been killed!\nProceed further with your mission!\nReach the 2nd checkpoint in the given time!\nPrepare for the takedown!"
+            ],
+            [
+                "BOOK TICKETS NOW"
+            ],
+            [
+                "CONTINUE MISSION"
+            ]
+        ],
+        [
+            [
+                "STAGE 2 NOT CLEARED"
+            ],
+            [
+                "Your Location is spotted!\n\nTry Again!"
+            ],
+            [
+                "BOOK TICKETS NOW"
+            ],
+            [
+                "TRY AGAIN "
+            ]
+        ],
+        [
+            [
+                "STAGE 3"
+            ],
+            [
+                "- You have reached the final stage\n- Kill 2 targets in given time.\n- Use bullets wisely."
+            ],
+            [
+                "BOOK TICKETS NOW"
+            ],
+            [
+                "CONTINUE MISSION "
+            ]
+        ],
+        [
+            [
+                "MISSION ACCOMPLISHED"
+            ],
+            [
+                "Headshots Confirmed!\nEnemy has been neutralized!\n\nYour country is proud of you!"
+            ],
+            [
+                "BOOK TICKETS NOW"
+            ],
+            [
+                "RESTART MISSION"
+            ]
+        ],
+        [
+            [
+                "MISSION COMPROMISED"
+            ],
+            [
+                "You have missed your chance!\nYour position is spotted!\n\nTake Cover! Stay Low! Try Again!"
+            ],
+            [
+                "BOOK TICKETS NOW"
+            ],
+            [
+                "TRY AGAIN"
+            ]
+        ]
+    ]
+}
