@@ -1349,11 +1349,6 @@ const C3=self.C3,C3X=self.C3X,IBehaviorInstance=self.IBehaviorInstance,Ease=self
 {const t=self.C3;t.Behaviors.Bullet=class extends t.SDKBehaviorBase{constructor(t){super(t)}Release(){super.Release()}}}{const t=self.C3;t.Behaviors.Bullet.Type=class extends t.SDKBehaviorTypeBase{constructor(t){super(t)}Release(){super.Release()}OnCreate(){}}}{const t=self.C3,e=self.C3X,s=self.IBehaviorInstance,i=0,n=1,h=2,a=3,_=4,l=5,o=6;t.Behaviors.Bullet.Instance=class extends t.SDKBehaviorInstanceBase{constructor(t,e){super(t);const s=this.GetWorldInfo();this._speed=0,this._acc=0,this._g=0,this._bounceOffSolid=!1,this._setAngle=!1,this._isStepping=!1,this._isEnabled=!0,this._dx=0,this._dy=0,this._lastX=s.GetX(),this._lastY=s.GetY(),this._lastKnownAngle=s.GetAngle(),this._travelled=0,this._stepSize=Math.min(Math.abs(s.GetWidth()),Math.abs(s.GetHeight())/2),this._stopStepping=!1,e&&(this._speed=e[i],this._acc=e[n],this._g=e[h],this._bounceOffSolid=!!e[a],this._setAngle=!!e[_],this._isStepping=!!e[l],this._isEnabled=!!e[o]);const r=s.GetAngle();this._dx=Math.cos(r)*this._speed,this._dy=Math.sin(r)*this._speed,this._isEnabled&&(this._StartTicking(),this._bounceOffSolid&&this._StartPostTicking())}Release(){super.Release()}SaveToJson(){const t={"dx":this._dx,"dy":this._dy,"lx":this._lastX,"ly":this._lastY,"lka":this._lastKnownAngle,"t":this._travelled};return 0!==this._acc&&(t["acc"]=this._acc),0!==this._g&&(t["g"]=this._g),this._isStepping&&(t["st"]=this._isStepping),this._isEnabled||(t["e"]=this._isEnabled),this._bounceOffSolid&&(t["bos"]=this._bounceOffSolid),this._setAngle&&(t["sa"]=this._setAngle),t}LoadFromJson(t){this._dx=t["dx"],this._dy=t["dy"],this._lastX=t["lx"],this._lastY=t["ly"],this._lastKnownAngle=t["lka"],this._travelled=t["t"],this._acc=t.hasOwnProperty("acc")?t["acc"]:0,this._g=t.hasOwnProperty("g")?t["g"]:0,this._isStepping=!!t.hasOwnProperty("st")&&t["st"],this._bounceOffSolid=!!t.hasOwnProperty("bos")&&t["bos"],this._setAngle=!!t.hasOwnProperty("sa")&&t["sa"],this._SetEnabled(!t.hasOwnProperty("e")||t["e"])}Tick(){if(!this._isEnabled)return;const e=this._runtime.GetDt(this._inst),s=this._inst.GetWorldInfo();if(s.GetAngle()!==this._lastKnownAngle){const e=s.GetAngle();if(this._setAngle){const s=t.distanceTo(0,0,this._dx,this._dy);this._dx=Math.cos(e)*s,this._dy=Math.sin(e)*s}this._lastKnownAngle=e}let i=0,n=0;if(0!==this._acc){let h=t.distanceTo(0,0,this._dx,this._dy),a=0;a=0===this._dx&&0===this._dy?s.GetAngle():t.angleTo(0,0,this._dx,this._dy),h+=this._acc*e,i=Math.cos(a)*this._acc,n=Math.sin(a)*this._acc,h<0&&(h=0,i=0,n=0),this._dx=Math.cos(a)*h,this._dy=Math.sin(a)*h}if(0!==this._g&&(this._dy+=this._g*e,n+=this._g),this._lastX=s.GetX(),this._lastY=s.GetY(),0!==this._dx||0!==this._dy){const h=this._dx*e+.5*i*e*e,a=this._dy*e+.5*n*e*e,_=t.distanceTo(0,0,h,a);if(this._MoveBy(h,a,_),this._travelled+=_,this._setAngle&&(0!==h||0!==a)){const e=t.angleTo(0,0,h,a);s.SetAngle(e),this._lastKnownAngle=s.GetAngle()}s.SetBboxChanged()}}_MoveBy(e,s,i){const n=this.GetWorldInfo();if(!this._isStepping||i<=this._stepSize)return n.OffsetXY(e,s),n.SetBboxChanged(),void(this._isStepping&&this.Trigger(t.Behaviors.Bullet.Cnds.OnStep));this._stopStepping=!1;const h=n.GetX(),a=n.GetY(),_=h+e,l=a+s,o=t.angleTo(0,0,e,s),r=Math.cos(o)*this._stepSize,d=Math.sin(o)*this._stepSize,c=Math.floor(i/this._stepSize);for(let e=1;e<=c;++e)if(n.SetXY(h+r*e,a+d*e),n.SetBboxChanged(),this.Trigger(t.Behaviors.Bullet.Cnds.OnStep),this._inst.IsDestroyed()||this._stopStepping)return;n.SetXY(_,l),n.SetBboxChanged(),this.Trigger(t.Behaviors.Bullet.Cnds.OnStep)}PostTick(){if(!this._isEnabled||!this._bounceOffSolid||0===this._dx&&0===this._dy)return;const e=this._runtime.GetDt(this._inst),s=this._inst.GetWorldInfo(),i=this._runtime.GetCollisionEngine(),n=i.TestOverlapSolid(this._inst);if(n){i.RegisterCollision(this._inst,n);const h=t.distanceTo(0,0,this._dx,this._dy),a=i.CalculateBounceAngle(this._inst,this._lastX,this._lastY);this._dx=Math.cos(a)*h,this._dy=Math.sin(a)*h,s.OffsetXY(this._dx*e,this._dy*e),s.SetBboxChanged(),this._setAngle&&(s.SetAngle(a),this._lastKnownAngle=s.GetAngle(),s.SetBboxChanged()),i.PushOutSolid(this._inst,this._dx/h,this._dy/h,Math.max(2.5*h*e,30))||i.PushOutSolidNearest(this._inst,100)}}GetPropertyValueByIndex(t){switch(t){case i:return this._GetSpeed();case n:return this._GetAcceleration();case h:return this._GetGravity();case _:return this._setAngle;case l:return this._isStepping;case o:return this._IsEnabled()}}SetPropertyValueByIndex(t,e){switch(t){case i:this._SetSpeed(e);break;case n:this._acc=e;break;case h:this._g=e;break;case _:this._setAngle=!!e;break;case l:this._isStepping=!!e;break;case o:this._SetEnabled(!!e)}}_SetSpeed(e){const s=t.angleTo(0,0,this._dx,this._dy);this._dx=Math.cos(s)*e,this._dy=Math.sin(s)*e}_GetSpeed(){return t.roundToDp(t.distanceTo(0,0,this._dx,this._dy),6)}_SetAcceleration(t){this._acc=t}_GetAcceleration(){return this._acc}_SetGravity(t){this._g=t}_GetGravity(){return this._g}_SetAngleOfMotion(e){const s=t.distanceTo(0,0,this._dx,this._dy);this._dx=Math.cos(e)*s,this._dy=Math.sin(e)*s}_GetAngleOfMotion(){return t.angleTo(0,0,this._dx,this._dy)}_SetBounceOffSolids(t){t=!!t,this._bounceOffSolid!==t&&(this._bounceOffSolid=t,this._isEnabled&&(this._bounceOffSolid?this._StartPostTicking():this._StopPostTicking()))}_IsBounceOffSolids(){return this._bounceOffSolid}_SetDistanceTravelled(t){this._travelled=t}_GetDistanceTravelled(){return this._travelled}_SetEnabled(t){this._isEnabled=!!t,this._isEnabled?(this._StartTicking(),this._bounceOffSolid&&this._StartPostTicking()):(this._StopTicking(),this._StopPostTicking())}_IsEnabled(){return this._isEnabled}GetDebuggerProperties(){const e="behaviors.bullet";return[{title:"$"+this.GetBehaviorType().GetName(),properties:[{name:e+".debugger.vector-x",value:this._dx,onedit:t=>this._dx=t},{name:e+".debugger.vector-y",value:this._dy,onedit:t=>this._dy=t},{name:e+".properties.speed.name",value:this._GetSpeed(),onedit:t=>this._SetSpeed(t)},{name:e+".debugger.angle-of-motion",value:t.toDegrees(this._GetAngleOfMotion())},{name:e+".properties.gravity.name",value:this._GetGravity(),onedit:t=>this._SetGravity(t)},{name:e+".properties.acceleration.name",value:this._GetAcceleration(),onedit:t=>this._SetAcceleration(t)},{name:e+".debugger.distance-travelled",value:this._GetDistanceTravelled()},{name:e+".properties.enabled.name",value:this._IsEnabled(),onedit:t=>this._SetEnabled(t)}]}]}GetScriptInterfaceClass(){return self.IBulletBehaviorInstance}};const r=new WeakMap;self.IBulletBehaviorInstance=class extends s{constructor(){super(),r.set(this,s._GetInitInst().GetSdkInstance())}get speed(){return r.get(this)._GetSpeed()}set speed(t){e.RequireFiniteNumber(t),r.get(this)._SetSpeed(t)}get acceleration(){return r.get(this)._GetAcceleration()}set acceleration(t){e.RequireFiniteNumber(t),r.get(this)._SetAcceleration(t)}get gravity(){return r.get(this)._GetGravity()}set gravity(t){e.RequireFiniteNumber(t),r.get(this)._SetGravity(t)}get angleOfMotion(){return r.get(this)._GetAngleOfMotion()}set angleOfMotion(t){e.RequireFiniteNumber(t),r.get(this)._SetAngleOfMotion(t)}get bounceOffSolids(){return r.get(this)._IsBounceOffSolids()}set bounceOffSolids(t){r.get(this)._SetBounceOffSolids(!!t)}get distanceTravelled(){return r.get(this)._GetDistanceTravelled()}set distanceTravelled(t){e.RequireFiniteNumber(t),r.get(this)._SetDistanceTravelled(t)}get isEnabled(){return r.get(this)._IsEnabled()}set isEnabled(t){r.get(this)._SetEnabled(t)}}}{const t=self.C3;t.Behaviors.Bullet.Cnds={CompareSpeed(e,s){const i=Math.hypot(this._dx,this._dy);return t.compare(i,e,s)},CompareTravelled(e,s){return t.compare(this._GetDistanceTravelled(),e,s)},OnStep:()=>!0,IsEnabled(){return this._IsEnabled()}}}{const t=self.C3;t.Behaviors.Bullet.Acts={SetSpeed(t){this._SetSpeed(t)},SetAcceleration(t){this._SetAcceleration(t)},SetGravity(t){this._SetGravity(t)},SetAngleOfMotion(e){this._SetAngleOfMotion(t.toRadians(e))},Bounce(e){if(!e)return;const s=e.GetFirstPicked(this._inst);if(!s)return;const i=this._inst.GetWorldInfo(),n=this._runtime.GetCollisionEngine(),h=this._runtime.GetDt(this._inst),a=t.distanceTo(0,0,this._dx,this._dy),_=n.CalculateBounceAngle(this._inst,this._lastX,this._lastY,s);this._dx=Math.cos(_)*a,this._dy=Math.sin(_)*a,i.OffsetXY(this._dx*h,this._dy*h),i.SetBboxChanged(),this._setAngle&&(i.SetAngle(_),this._lastKnownAngle=i.GetAngle(),i.SetBboxChanged()),0!==a&&(this._bounceOffSolid?n.PushOutSolid(this._inst,this._dx/a,this._dy/a,Math.max(2.5*a*h,30))||n.PushOutSolidNearest(this._inst,100):n.PushOut(this._inst,this._dx/a,this._dy/a,Math.max(2.5*a*h,30),s))},SetBounceOffSolids(t){this._SetBounceOffSolids(t)},SetDistanceTravelled(t){this._SetDistanceTravelled(t)},SetEnabled(t){this._SetEnabled(t)},StopStepping(){this._stopStepping=!0}}}{const t=self.C3;t.Behaviors.Bullet.Exps={Speed(){return this._GetSpeed()},Acceleration(){return this._GetAcceleration()},AngleOfMotion(){return t.toDegrees(this._GetAngleOfMotion())},DistanceTravelled(){return this._GetDistanceTravelled()},Gravity(){return this._GetGravity()}}}
 }
 
-// scripts/behaviors/Timer/c3runtime/runtime.js
-{
-{const e=self.C3;e.Behaviors.Timer=class extends e.SDKBehaviorBase{constructor(e){super(e)}Release(){super.Release()}}}{const e=self.C3;e.Behaviors.Timer.Type=class extends e.SDKBehaviorTypeBase{constructor(e){super(e)}Release(){super.Release()}OnCreate(){}}}{const e=self.C3,t=self.C3X,r=self.IBehaviorInstance;e.Behaviors.Timer.SingleTimer=class{constructor(t,r,i,s){this._current=e.New(e.KahanSum),this._current.Set(t||0),this._total=e.New(e.KahanSum),this._total.Set(r||0),this._duration=i||0,this._isRegular=!!s,this._isPaused=!1}GetCurrentTime(){return this._current.Get()}GetTotalTime(){return this._total.Get()}GetDuration(){return this._duration}SetPaused(e){this._isPaused=!!e}IsPaused(){return this._isPaused}Add(e){this._current.Add(e),this._total.Add(e)}HasFinished(){return this._current.Get()>=this._duration}Update(){if(this.HasFinished()){if(!this._isRegular)return!0;this._current.Subtract(this._duration)}return!1}SaveToJson(){return{"c":this._current.Get(),"t":this._total.Get(),"d":this._duration,"r":this._isRegular,"p":this._isPaused}}LoadFromJson(e){this._current.Set(e["c"]),this._total.Set(e["t"]),this._duration=e["d"],this._isRegular=!!e["r"],this._isPaused=!!e["p"]}},e.Behaviors.Timer.Instance=class extends e.SDKBehaviorInstanceBase{constructor(e,t){super(e),this._timers=new Map}Release(){this._timers.clear(),super.Release()}_StartTimer(t,r,i){const s=new e.Behaviors.Timer.SingleTimer(0,0,t,i);this._timers.set(r.toLowerCase(),s),this._UpdateTickState()}_StopTimer(e){this._timers.delete(e.toLowerCase()),this._UpdateTickState()}_StopAllTimers(){this._timers.clear(),this._UpdateTickState()}_IsTimerRunning(e){return this._timers.has(e.toLowerCase())}_GetTimerCurrentTime(e){const t=this._timers.get(e.toLowerCase());return t?t.GetCurrentTime():0}_GetTimerNormalizedProgress(e){const t=this._timers.get(e.toLowerCase());return t?t.GetCurrentTime()/t.GetDuration():0}_GetTimerTotalTime(e){const t=this._timers.get(e.toLowerCase());return t?t.GetTotalTime():0}_GetTimerDuration(e){const t=this._timers.get(e.toLowerCase());return t?t.GetDuration():0}_HasTimerFinished(e){const t=this._timers.get(e.toLowerCase());return!!t&&t.HasFinished()}_SetTimerPaused(e,t){const r=this._timers.get(e.toLowerCase());r&&r.SetPaused(t)}_IsTimerPaused(e){const t=this._timers.get(e.toLowerCase());return!!t&&t.IsPaused()}_SetAllTimersPaused(e){for(const t of this._timers.values())t.SetPaused(e)}_UpdateTickState(){this._timers.size>0?(this._StartTicking(),this._StartTicking2()):(this._StopTicking(),this._StopTicking2())}SaveToJson(){const e={};for(const[t,r]of this._timers.entries())e[t]=r.SaveToJson();return e}LoadFromJson(t){this._timers.clear();for(const[r,i]of Object.entries(t)){const t=new e.Behaviors.Timer.SingleTimer;t.LoadFromJson(i),this._timers.set(r,t)}this._UpdateTickState()}Tick(){const e=this._runtime.GetDt(this._inst);for(const[t,r]of this._timers)r.IsPaused()||(r.Add(e),r.HasFinished()&&this.DispatchScriptEvent("timer",!1,{tag:t}))}Tick2(){for(const[e,t]of this._timers.entries()){t.Update()&&this._timers.delete(e)}}GetDebuggerProperties(){return[{title:"behaviors.timer.debugger.timers",properties:[...this._timers.entries()].map(e=>({name:"$"+e[0],value:`${Math.round(10*e[1].GetCurrentTime())/10} / ${Math.round(10*e[1].GetDuration())/10}`}))}]}GetScriptInterfaceClass(){return self.ITimerBehaviorInstance}};const i=["once","regular"];self.ITimerBehaviorInstance=class extends r{#e;constructor(){super(),this.#e=r._GetInitInst().GetSdkInstance()}startTimer(e,r,s="once"){t.RequireFiniteNumber(e),t.RequireString(r);const a=i.indexOf(s);if(-1===a)throw new Error("invalid type");this.#e._StartTimer(e,r,1===a)}setTimerPaused(e,r){t.RequireString(e),this.#e._SetTimerPaused(e,!!r)}setAllTimersPaused(e){this.#e._SetAllTimersPaused(!!e)}stopTimer(e){t.RequireString(e),this.#e._StopTimer(e)}stopAllTimers(){this.#e._StopAllTimers()}isTimerRunning(e){return t.RequireString(e),this.#e._IsTimerRunning(e)}isTimerPaused(e){return t.RequireString(e),this.#e._IsTimerPaused(e)}getCurrentTime(e){return t.RequireString(e),this.#e._GetTimerCurrentTime(e)}getNormalizedProgress(e){return t.RequireString(e),this.#e._GetTimerNormalizedProgress(e)}getTotalTime(e){return t.RequireString(e),this.#e._GetTimerTotalTime(e)}getDuration(e){return t.RequireString(e),this.#e._GetTimerDuration(e)}hasFinished(e){return t.RequireString(e),this.#e._HasTimerFinished(e)}}}self.C3.Behaviors.Timer.Cnds={OnTimer(e){return this._HasTimerFinished(e)},IsTimerRunning(e){return this._IsTimerRunning(e)},IsTimerPaused(e){return this._IsTimerPaused(e)}};self.C3.Behaviors.Timer.Acts={StartTimer(e,t,r){this._StartTimer(e,r,1===t)},StopTimer(e){this._StopTimer(e)},StopAllTimers(){this._StopAllTimers()},PauseResumeTimer(e,t){this._SetTimerPaused(e,0===t)},PauseResumeAllTimers(e){this._SetAllTimersPaused(0===e)}};self.C3.Behaviors.Timer.Exps={CurrentTime(e){return this._GetTimerCurrentTime(e)},NormalizedProgress(e){return this._GetTimerNormalizedProgress(e)},TotalTime(e){return this._GetTimerTotalTime(e)},Duration(e){return this._GetTimerDuration(e)}};
-}
-
 // scripts/expTable.js
 {
 
@@ -1493,7 +1488,7 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(0, 5);
 		},
-		() => 2.5,
+		() => 1.5,
 		() => 0.5,
 		() => "b62",
 		() => "Jio Studio Finished",
@@ -1511,11 +1506,11 @@ self.C3_ExpressionFuncs = [
 		() => "interstitial_text_array",
 		() => 0.8,
 		() => -90,
-		() => "Hint1",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => and("Start HunterAssassin Layout ", v0.GetValue());
 		},
+		() => "Characters",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => and("Check Point ", n0.ExpInstVar());
@@ -1559,7 +1554,6 @@ self.C3_ExpressionFuncs = [
 		() => 575,
 		() => 3,
 		() => "Player",
-		() => "Characters",
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -1580,8 +1574,10 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			return () => C3.lerp(n0.ExpObject(), n1.ExpObject(), 0.025);
 		},
+		() => "Player Bullet Collision MapFloor2",
 		() => "Shoot",
 		() => "Damage",
+		() => "Player Bullet Collision Enemy",
 		() => "footsteps",
 		p => {
 			const n0 = p._GetNode(0);
@@ -1606,7 +1602,10 @@ self.C3_ExpressionFuncs = [
 			return () => Math.floor(f0(0, 2));
 		},
 		() => "Floor",
-		() => 1.5,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => ("Enemey Animation " + n0.ExpObject());
+		},
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -1638,6 +1637,7 @@ self.C3_ExpressionFuncs = [
 			const v0 = p._GetNode(0).GetVar();
 			return () => and("Interstitial Index ", v0.GetValue());
 		},
+		() => 60,
 		() => "Timer",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -1649,6 +1649,10 @@ self.C3_ExpressionFuncs = [
 		() => "Reset Game",
 		() => -1,
 		() => 299,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => and("CheckPoint ", v0.GetValue());
+		},
 		() => "GridConcept",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -1734,7 +1738,8 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const v1 = p._GetNode(1).GetVar();
-			return () => and((and("Every Tick ", v0.GetValue()) + " Intersitial "), v1.GetValue());
+			const v2 = p._GetNode(2).GetVar();
+			return () => and((and((and("Every Tick ", v0.GetValue()) + " Intersitial "), v1.GetValue()) + " Bullet Count "), v2.GetValue());
 		}
 ];
 
