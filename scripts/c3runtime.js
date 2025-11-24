@@ -1512,13 +1512,20 @@ self.C3_ExpressionFuncs = [
 		() => 0.8,
 		() => -90,
 		() => "Hint1",
-		() => "Start HunterAssassin Layout",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => and("Start HunterAssassin Layout ", v0.GetValue());
+		},
 		p => {
 			const n0 = p._GetNode(0);
 			return () => and("Check Point ", n0.ExpInstVar());
 		},
 		() => 576,
 		() => 1472,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => and("Disable Checkpoint ", v0.GetValue());
+		},
 		p => {
 			const n0 = p._GetNode(0);
 			return () => ((Math.floor((n0.ExpObject() / 128)) * 128) + 64);
