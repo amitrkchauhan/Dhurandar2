@@ -1589,6 +1589,7 @@ self.C3_ExpressionFuncs = [
 			return () => C3.lerp(n0.ExpObject(), ((Math.floor((n1.ExpObject() / 128)) * 128) + 64), 0.5);
 		},
 		() => "GunShot",
+		() => "PlayerBullet",
 		() => 4,
 		() => 7,
 		() => "Enemy AI",
@@ -1613,6 +1614,7 @@ self.C3_ExpressionFuncs = [
 			const n3 = p._GetNode(3);
 			return () => C3.toDegrees(C3.angleTo(n0.ExpObject(), n1.ExpObject(), n2.ExpObject(), n3.ExpObject()));
 		},
+		() => "EnemyBullet",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => and("Enemy Angle ", n0.ExpObject());
