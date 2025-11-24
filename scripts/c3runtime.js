@@ -1598,6 +1598,7 @@ self.C3_ExpressionFuncs = [
 			return () => Math.floor(f0(0, 2));
 		},
 		() => "Floor",
+		() => 1.5,
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -1689,11 +1690,24 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() + 90);
 		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => and("LevelEneimes ", v0.GetValue());
+		},
 		() => "Killed",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => and("LevelEnemy ", v0.GetValue());
+		},
 		() => "sniper_bg1",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() - 300);
+		},
+		() => "sniper_bg2",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 300);
 		},
 		() => 290,
 		() => 500,
@@ -1703,9 +1717,15 @@ self.C3_ExpressionFuncs = [
 			return () => (n0.ExpObject() + 30);
 		},
 		() => 600,
+		() => 350,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(1, 3);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			return () => and((and("Every Tick ", v0.GetValue()) + " Intersitial "), v1.GetValue());
 		}
 ];
 
