@@ -1,7 +1,5 @@
 const scriptsInEvents = {
     async Hunterassassin_Event96_Act2(runtime, localVars) {
-    },
-    async Hunterassassin_Event107_Act2(runtime, localVars) {
     }
 };
 globalThis.C3.TypeScriptInEvents = scriptsInEvents;
