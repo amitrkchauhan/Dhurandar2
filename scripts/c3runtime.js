@@ -1629,6 +1629,7 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "Interstitial Screen",
 		() => 9,
+		() => "https://in.bookmyshow.com/",
 		() => 6,
 		() => 5,
 		() => 1152,
