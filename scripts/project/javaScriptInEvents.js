@@ -2,12 +2,7 @@
 
 const scriptsInEvents = {
 
-	async Hunterassassin_Event82_Act2(runtime, localVars)
-	{
-
-	},
-
-	async Hunterassassin_Event83_Act1(runtime, localVars)
+	async Hunterassassin_Event83_Act2(runtime, localVars)
 	{
 
 	},
@@ -37,12 +32,17 @@ const scriptsInEvents = {
 
 	},
 
-	async Hunterassassin_Event98_Act6(runtime, localVars)
+	async Hunterassassin_Event89_Act1(runtime, localVars)
 	{
 
 	},
 
-	async Hunterassassin_Event109_Act7(runtime, localVars)
+	async Hunterassassin_Event99_Act6(runtime, localVars)
+	{
+
+	},
+
+	async Hunterassassin_Event110_Act7(runtime, localVars)
 	{
 		window.open("https://amitrkchauhan.github.io/connectLines/", "_blank");
 		//StartLineGame();

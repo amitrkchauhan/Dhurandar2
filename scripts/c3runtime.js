@@ -1510,6 +1510,7 @@ self.C3_ExpressionFuncs = [
 			const v0 = p._GetNode(0).GetVar();
 			return () => and("Start HunterAssassin Layout ", v0.GetValue());
 		},
+		() => "Elements",
 		() => "Characters",
 		p => {
 			const n0 = p._GetNode(0);
