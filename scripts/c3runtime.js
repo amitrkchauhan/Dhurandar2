@@ -1510,6 +1510,7 @@ self.C3_ExpressionFuncs = [
 			const v0 = p._GetNode(0).GetVar();
 			return () => and("Start HunterAssassin Layout ", v0.GetValue());
 		},
+		() => "BUBBLE",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => and("Check Point ", n0.ExpInstVar());
