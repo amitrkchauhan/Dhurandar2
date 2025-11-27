@@ -1645,10 +1645,6 @@ self.C3_ExpressionFuncs = [
 		() => -1,
 		() => 299,
 		() => 9,
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => and("CheckPoint ", v0.GetValue());
-		},
 		() => "https://in.bookmyshow.com/",
 		() => "NewWindow",
 		() => 6,
